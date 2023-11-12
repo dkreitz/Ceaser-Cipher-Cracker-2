@@ -1,33 +1,45 @@
-# Vigenere Cipher Dictionary Hacker
+# Inspired from Vigenere Cipher Dictionary Hacker
 # http://inventwithpython.com/hacking (BSD Licensed)
 
 import detectEnglish
 import vigenereCipher
-import pyperclip
 
 
 def main():
-  ciphertext = """Tzx isnz eccjxkg nfq lol mys bbqq I lxcz."""
+  # Read the input.txt file with the encrypted text
+  with open('input.txt', 'r') as f:
+    ciphertext = f.read()
+    f.close()
+
+  # Hack the text using the Vigenere Cipher
   hackedMessage = hackVigenere(ciphertext)
 
-  if hackedMessage != None:
-    print('Copying hacked message to clipboard:')
-    print(hackedMessage)
-    pyperclip.copy(hackedMessage)
+  if hackedMessage is not None:
+    # SUCCESS
+    print('Succeeded to hack encryption! (～￣▽￣)～ ')
+    with open('output.txt', 'w') as f:
+      f.write(hackedMessage)
+      f.close()
   else:
-    print('Failed to hack encryption.')
+    # FAIL
+    print('Failed to hack encryption. (╯‵□′)╯︵┻━┻ ')
 
 
 def hackVigenere(ciphertext):
-  fo = open('dictionary.txt')
-  words = fo.readlines()
-  fo.close()
+  # Load in the dictionary of English words
+  with open('dictionary.txt', 'r') as fo:
+    words = fo.readlines()
+    fo.close()
 
+  # Loop through all possible keys using the entire dictionary of English words
   for word in words:
-    word = word.strip() # remove the newline at the end
+    word = word.strip()  # remove the newline character at the end
+
     decryptedText = vigenereCipher.decryptMessage(word, ciphertext)
+
+    # If 40% of the decreypted words match English words,
+    # check with user to see if the decrypted key has been found.
     if detectEnglish.isEnglish(decryptedText, wordPercentage=40):
-      # Check with user to see if the decrypted key has been found.
       print()
       print('Possible encryption break:')
       print('Key ' + str(word) + ': ' + decryptedText[:100])
@@ -37,6 +49,7 @@ def hackVigenere(ciphertext):
 
       if response.upper().startswith('D'):
         return decryptedText
+
 
 if __name__ == '__main__':
   main()
