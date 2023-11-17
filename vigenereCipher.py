@@ -1,10 +1,11 @@
-# Inspired from the Vigenere Cipher (Polyalphabetic Substitution Cipher)
+# Vigenere Cipher (Polyalphabetic Substitution Cipher)
 # http://inventwithpython.com/hacking (BSD Licensed)
 
 LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 
 def main():
+  myEncryptedMessage = 'W uch hvwg kcfzr fsqcfr kvwzs aoywbu o kspgwhs tcf kcfzr fsqcfrg.'
   myMessage = 'Jacques knows how to write code.'
 
   translated = ''

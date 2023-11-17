@@ -16,13 +16,13 @@ def main():
 
   if hackedMessage is not None:
     # SUCCESS
-    print('Succeeded to hack encryption! (～￣▽￣)～ ')
+    print('YOOOOO! (～￣▽￣)～ ')
     with open('output.txt', 'w') as f:
       f.write(hackedMessage)
       f.close()
   else:
     # FAIL
-    print('Failed to hack encryption. (╯‵□′)╯︵┻━┻ ')
+    print('Nope. (╯‵□′)╯︵┻━┻ ')
 
 
 def hackVigenere(ciphertext):
